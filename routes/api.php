@@ -24,14 +24,13 @@ Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('lo
 
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 
+Route::middleware('auth:api')->get('/contact', [App\Http\Controllers\Api\ContactController::class, 'getAllContact']);
+
 Route::middleware('auth:api')->post('/storecontact', 'App\Http\Controllers\Api\CrudController@store');
 
-Route::post('/updatecontact', 'App\Http\Controllers\Api\CrudController@update');
+Route::middleware('auth:api')->post('/updatecontact', 'App\Http\Controllers\Api\CrudController@update');
 
-Route::post('/destroycontact', 'App\Http\Controllers\Api\CrudController@destroy');
-
-
-Route::middleware('auth:api')->get('/contact', [App\Http\Controllers\Api\ContactController::class, 'getAllContact']);
+Route::middleware('auth:api')->post('/destroycontact', 'App\Http\Controllers\Api\CrudController@destroy');
 
 
 Route::get('/contact_tes', [App\Http\Controllers\Api\ContactController::class, 'getAllContact']);
